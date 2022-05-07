@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Petition;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,5 +15,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        /*DB::table("petitions")->insert([
+            "title" => Str::random(10)
+        ]);*/
+        Petition::factory(50)->create();
     }
 }
