@@ -16,7 +16,7 @@ class CreateZipsTable extends Migration
         Schema::create('zips', function (Blueprint $table) {
             $table->id();
             $table->string("code");
-
+            $table->index("code");
             $table->timestamps();
         });
     }

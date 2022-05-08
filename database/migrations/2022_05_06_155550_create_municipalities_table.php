@@ -19,6 +19,8 @@ class CreateMunicipalitiesTable extends Migration
             $table->unsignedBigInteger("zip_id");
             $table->foreign("zip_id")->references("id")->on("zips");
             $table->timestamps();
+
+            $table->index("zip_id");
         });
     }
 

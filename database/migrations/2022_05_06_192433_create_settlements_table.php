@@ -23,6 +23,8 @@ class CreateSettlementsTable extends Migration
             $table->unsignedBigInteger("zip_id");
             $table->foreign("zip_id")->references("id")->on("zips");
             $table->foreign("settlement_type")->references("id")->on("settlements");
+
+            $table->index("zip_id");
             $table->timestamps();
         });
     }
