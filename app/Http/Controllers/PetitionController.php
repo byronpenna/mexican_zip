@@ -20,16 +20,22 @@ class PetitionController extends Controller
      */
     public function index()
     {
-
-        $match = [
-          Zip::CODE_FIELD => "20010"
-        ];
-        echo "hola";
         /*
+        $match = [
+            Zip::CODE_FIELD => "20010"
+        ];
         $zip = Zip::select("code")->with('municipalities')
             ->with('settlements')
             ->with("federals")
             ->where($match)->first();*/
+        /*
+        $match = [
+          Zip::CODE_FIELD => "20010"
+        ];
+        //echo "hola";
+
+        $zip = Zip::select("code")->first();
+        return new ZipResource($zip);*/
         /*$zipG = null;
         Zip::chunkById(1,function($zips){
             foreach ($zips as $zip){
@@ -45,18 +51,20 @@ class PetitionController extends Controller
         /*echo "<pre>";
         print_r($zip->toArray());
         echo "</pre>";*/
-
-        /*$zip = Zip::all();
-        */
-
+        /*
+        $zip = Zip::all();
+        echo "<pre>";
+        print_r($zip->toArray());
+        echo "</pre>";*/
         //return new ZipResource($zip);
+
         /*
 
                 //return ZipResource::collection($petitions)[0]->Municipalities;
 
                 /*return new PetitionCollection($petitions);*/
 
-        //Excel::import(new ZipImport,"testbook.xlsx" );
+        Excel::import(new ZipImport,"testbook.xlsx" );
         /*if(Petition::where('title' , '=' , 'asdasd')->first() == null){
             echo "nothing to see ";
         }else{
@@ -86,7 +94,8 @@ class PetitionController extends Controller
     public function show(Petition $petition)
     {
         //
-        return new PetitionResource($petition);
+        echo "show";
+        //return new PetitionResource($petition);
     }
 
     /**

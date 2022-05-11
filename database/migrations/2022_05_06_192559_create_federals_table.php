@@ -14,13 +14,13 @@ class CreateFederalsTable extends Migration
     public function up()
     {
         Schema::create('federals', function (Blueprint $table) {
-            $table->id();
+            $table->increments("id");
 
             $table->string("name");
             $table->string("code")->nullable();
 
-            $table->unsignedBigInteger("zip_id");
-            $table->foreign("zip_id")->references("id")->on("zips");
+            //$table->unsignedBigInteger("zip_id");
+            //$table->foreign("zip_id")->references("id")->on("zips");
             $table->timestamps();
         });
     }

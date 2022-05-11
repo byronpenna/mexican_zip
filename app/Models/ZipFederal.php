@@ -10,52 +10,54 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @property $id
- * @property $name
- * @property $code
  * @property $zip_id
+ * @property $federal_id
  */
-class Federal extends Model implements ImportationContract
+class ZipFederal extends Model implements ImportationContract
 {
     use HasFactory;
-    protected $table = "federals";
+
+    protected $table = "zip_federals";
     protected $fillable = [
-        "name","code","zip_id"
+        "zip_id","federal_id"
     ];
-
-    const EXCEL_NAME = "d_estado";
-
-    const NAME_FIELD = 'name';
     const ZIP_FIELD = "zip_id";
+    const FEDERAL_FIELD = "federal_id";
+
     public function mapFromExcel($row){
-        $this->name = $row[self::EXCEL_NAME];
+        $this->zip_id = $row[self::ZIP_FIELD];
+        $this->federal_id = $row[self::FEDERAL_FIELD];
     }
     public function saveFromExcel($row):GenericResponse
     {
+
         $returnObj              = new GenericResponse();
         $returnObj->inserted    = false;
         $returnObj->status      = false;
-        try {
+
             $matchThese = [
-                self::NAME_FIELD =>  $row[self::EXCEL_NAME]
+                self::ZIP_FIELD =>  $row[self::ZIP_FIELD],
+                self::FEDERAL_FIELD =>  $row[self::FEDERAL_FIELD]
             ];
-            $fd = Federal::where($matchThese)->first();
-            if($fd == null){
-                $federal = new Federal();
-                $federal->mapFromExcel($row);
-                //$federal->zip_id = $row[self::ZIP_FIELD];
+            $fdzip = ZipFederal::where($matchThese)->first();
+            if($fdzip == null){
+                //echo "insert";
+                $zf = new ZipFederal();
+                $zf->mapFromExcel($row);
                 $insertedID = DB::table($this->table)->insertGetId(
-                    $federal->toArray()
+                    $zf->toArray()
                 );
+
                 $returnObj->status = true;
                 $returnObj->id = $insertedID;
                 return $returnObj;
             }
-
+            //echo "no insert";
             $returnObj->status = true;
-            $returnObj->id = $fd->id;
-        }catch (\Exception $ex){
+            $returnObj->id = $fdzip->id;
 
-        }
+
         return $returnObj;
+
     }
 }

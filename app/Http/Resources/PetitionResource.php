@@ -2,11 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Municipality;
-use App\Models\Zip;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ZipResource extends JsonResource
+class PetitionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,11 +16,8 @@ class ZipResource extends JsonResource
     {
         //return parent::toArray($request);
         return [
-            "zip_code"          => $this->code,
-            "locality"          => "",
-            "federal_entity"    => new FederalCollection($this->federals),
-            "settlements"       => new SettlementsCollection($this->settlements)
-            //"municipality"      => new Municipality($this->municipalities)
+          'id' => $this->id,
+          'title' => $this->title
         ];
     }
 }

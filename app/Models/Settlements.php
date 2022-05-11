@@ -13,14 +13,13 @@ use Illuminate\Support\Facades\DB;
  * @property $name
  * @property $zone_type
  * @property $settlement_type
- * @property $zip_id
  */
 class Settlements extends Model implements ImportationContract
 {
     use HasFactory;
-    protected $table = "settlements";
-    const EXCEL_NAME ="d_asenta";
-    const EXCEL_ZONE_TYPE = "d_zona";
+    protected $table        = "settlements";
+    const EXCEL_NAME        = "d_asenta";
+    const EXCEL_ZONE_TYPE   = "d_zona";
 
     const NAME_FIELD            = "name";
     const ZONE_TYPE_FIELD       = "zone_type";
@@ -30,8 +29,7 @@ class Settlements extends Model implements ImportationContract
     protected $fillable = [
         "name",
         "zone_type",
-        "settlement_type",
-        "zip_id"
+        "settlement_type"
     ];
 
     public function SettlementTypes(){
@@ -66,8 +64,8 @@ class Settlements extends Model implements ImportationContract
             if($st == null){
                 $settlement = new Settlements();
                 $settlement->mapFromExcel($row);
-                $settlement->zip_id = $row[self::ZIP_FIELD];
-                $settlement->settlement_type = $row[self::SETTLEMENT_TYPE_FIELD];
+                //$settlement->zip_id = $row[self::ZIP_FIELD];
+                //$settlement->settlement_type = $row[self::SETTLEMENT_TYPE_FIELD];
                 $insertedID = DB::table($this->table)->insertGetId($settlement->toArray());
 
                 $returnObj->inserted = true;

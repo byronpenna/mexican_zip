@@ -2,12 +2,12 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class MunicipalityResource extends JsonResource
+class SettlementTypeCollection extends ResourceCollection
 {
     /**
-     * Transform the resource into an array.
+     * Transform the resource collection into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
@@ -15,10 +15,5 @@ class MunicipalityResource extends JsonResource
     public function toArray($request)
     {
         return parent::toArray($request);
-        /*return [
-            "key" => $this->id,
-            "name" => $this->name
-        ];*/
-
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PetitionController;
+use App\Http\Controllers\ZipController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,4 @@ Route::get("/petitions",[PetitionController::class,'index']);
 Route::apiResource("/petitions",PetitionController::class)->only(
     'index'
 );
+Route::apiResource("/zip-codes",ZipController::class);

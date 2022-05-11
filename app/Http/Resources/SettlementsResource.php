@@ -14,6 +14,12 @@ class SettlementsResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        //return parent::toArray($request);
+        return [
+            "key"               => $this->id,
+            "name"              => $this->name,
+            "zone_type"         => $this->zone_type
+            //"settlement_type"   => $this->SettlementTypes
+        ];
     }
 }
